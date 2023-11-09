@@ -3,8 +3,6 @@ package crudapi.com.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 public class Review {
 
@@ -25,8 +23,8 @@ public class Review {
     }
 
     public Review(String review, Product product) {
-      this.review = review;
-      this.product = product;
+        this.review = review;
+        this.product = product;
     }
 
     public Long getId() {

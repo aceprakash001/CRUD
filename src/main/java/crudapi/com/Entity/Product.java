@@ -56,7 +56,8 @@ public class Product {
         this.description = description;
     }
 
-    public List<Review> getReviews() {return reviews;
+    public List<Review> getReviews() {
+        return reviews;
     }
 
     public void setReviews(List<Review> reviews) {

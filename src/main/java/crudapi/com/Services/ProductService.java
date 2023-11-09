@@ -1,8 +1,9 @@
 package crudapi.com.Services;
-import crudapi.com.Entity.Review;
+
 import crudapi.com.Entity.Product;
-import crudapi.com.Repository.ReviewRepository;
+import crudapi.com.Entity.Review;
 import crudapi.com.Repository.ProductRepository;
+import crudapi.com.Repository.ReviewRepository;
 import crudapi.com.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,9 @@ public class ProductService {
     }
 
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        List<Product> productDetails = productRepository.findAll();
+        System.out.println("Getting data: " + productDetails);
+        return productDetails;
     }
 
     public Product getProductById(Long id) {
