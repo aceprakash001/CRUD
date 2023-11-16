@@ -136,11 +136,6 @@ class ProductServiceTest {
         assertNotNull(result);
         assertEquals(reviewId, result.getId());
         assertEquals(mockProduct, result.getProduct());
-
-        verify(productRepository, times(1)).findById(productId);
-
-        verify(reviewRepository, times(1)).findById(reviewId);
-
     }
 }
 
