@@ -15,8 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 //@RunWith(SprigRunner.class)
@@ -136,6 +135,36 @@ class ProductServiceTest {
         assertNotNull(result);
         assertEquals(reviewId, result.getId());
         assertEquals(mockProduct, result.getProduct());
+
+        verify(reviewRepository, times(1)).save(any(Review.class));
+        verify(productRepository, never()).save(any(Product.class));
+    }
+
+    @Test
+    public void testForDeleteReview() {
+        Long productId = 520L;
+        Long reviewId = 52L;
+
+        Product mockProduct = new Product();
+        mockProduct.setId(productId);
+
+        Review mockReview = new Review();
+        mockReview.setId(reviewId);
+        mockReview.setProduct(mockProduct);
+
+        List<Review> reviews = new ArrayList<>();
+        reviews.add(mockReview);
+
+        mockProduct.setReviews(reviews);
+
+        when(productRepository.findById(productId)).thenReturn(Optional.of(mockProduct));
+        when(reviewRepository.findById(reviewId)).thenReturn(Optional.of(mockReview));
+
+        productService.deleteReview(productId, reviewId);
+
+        assertTrue(mockProduct.getReviews().isEmpty());
+        verify(productRepository, times(1)).save(mockProduct);
+        verify(reviewRepository, times(1)).delete(mockReview);
     }
 }
 
