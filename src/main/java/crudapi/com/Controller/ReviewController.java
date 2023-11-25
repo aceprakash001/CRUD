@@ -18,12 +18,12 @@ public class ReviewController {
     }
 
     @GetMapping
-    public List<Review> getCommentsForTask(@PathVariable Long productId) {
+    public List<Review> getReviewsForTask(@PathVariable Long productId) {
         return productService.getReviewsForProduct(productId);
     }
 
     @PostMapping
-    public Review addCommentToTask(@PathVariable Long productId, @RequestBody Review review) {
+    public Review addReviewToTask(@PathVariable Long productId, @RequestBody Review review) {
         return productService.addReviewToProduct(productId, review);
     }
 
